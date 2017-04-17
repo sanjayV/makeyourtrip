@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app="makeYourTrip">
+    <head>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cssak.mmtcdn.com/pwa-hlp/dist/assets/css/flights-24fc7ec9e4.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cssak.mmtcdn.com/hcs/assets/css/homepage/hs.common_header.css?v=2.0">
+        <link rel="stylesheet" type="text/css" href="https://flights.makemytrip.com/makemytrip/v2/css/raw.modify.search.min.css?2017-04-07">
+        <link rel="stylesheet" type="text/css" href="https://flights.makemytrip.com/makemytrip/v2/css/raw.common.min.css?2017-04-07">
+        <link rel="stylesheet" type="text/css" href="https://flights.makemytrip.com/makemytrip/v2/css/raw.listing.ow.min.css?2017-04-07">
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="js/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.min.js"></script> -->
+
+        <script src="js/angular-ui-router.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/config/config.js"></script>
+        <!-- <script src="app/config/route.js"></script> -->
+        <script src="app/directives/gridTrip.js"></script>
+        <script src="app/services/flightService.js"></script>
+        <script src="app/filters/flightFilter.js"></script>
+        <!-- <script src="app/filters/rangeFilter.js"></script> -->
+        <script src="app/controllers/flightController.js"></script>
+        <script src="app/controllers/searchController.js"></script>
+    </head>
+    <body>
+        <div class="main container-fluid">
+            <div ui-view="header"></div>
+            <div ui-view="main"></div>
+            <!-- <div ui-view="footer"></div> -->
+        </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+body {
+	font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e8e7e4;
+}
+
+.main.container-fluid {
+	padding-left: 0px;
+    padding-right: 0px;
+}
+
+header b {
+	color: #124680;
+}
+
+header b span {
+	color: #fff;
+    background-color: #ff0000;
+    padding: 2px 4px;
+    border-radius: 6px;
+}
+
+header nav.navbar {
+	margin-bottom: 0px;
+	border: 0px;
+}
+
+header nav.navbar-default .navbar-nav>.active>a {
+	background-color: #124680;
+	color: #fff;
+}
+
+.paxFilter {
+    position: absolute;
+    width: 210px;
+}
+
+.paxFilter:before {
+    left: 33%;
+    top: -3%;
+}
+
+.paxFilter .clearfix {
+    background-color: #fff;
+    padding: 2px 3px;
+}
+
+.classFilters {
+    background: #fff;
+    position: absolute;
+    top: 47px;
+    margin-bottom: 10px;
+}
+
+.classFilters .classBTN {
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.classFilters .classBTN input{
+    margin-left: -9999px;
+}
+
+.classLabel {
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #999;
+    color: #4a4a4a;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: 0;
+    user-select: none;
+    font-size: 14px;
+    padding: 9px 0;
+    border-radius: 3px;
+    color: #87a1bf;
+}
+
+.classLabel.checked {
+    background: #164880;
+    color: #fff;
+    border-radius: 3px;
+}

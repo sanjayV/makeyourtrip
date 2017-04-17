@@ -1,0 +1,33 @@
+<div ng-repeat="flightA in data" ng-show="data.length" class="clearfix listing_row append_bottom8 sponsored_list_wrapper shadow_genrator_1 c-listing_row c-listing_row--versionI">
+    <div class="listing_top clearfix">
+        <div class="top_first_part clearfix" ng-click="selectFltSmDevice(flt, $index);">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 logo_section padR0"> <span class="block append_bottom3 clearfix"> 
+                            <span class="L{{ flightA.flight.code }}_sm airlogo logo pull-left"></span> <span class="pull-left airline_info_detls">
+                            <span class="logo_name append_bottomSpace6 hidden-xs visible-stb ng-binding ng-scope" style="margin-top:4px">{{ flightA.flight.name }}</span>
+                <span class="block logo_name hidden-xs visible-stb light_gray flt_number_less600 ng-binding ng-scope" ng-if="!flt.im">{{ flightA.flight.code }}</span></span>
+                </span>
+                <span class="block logo_name append_bottomSpace6 hidden-lg hidden-md hidden-sm hidden-xs visible-stb ng-binding ng-scope" ng-if="!flt.im">{{ flightA.flight.name }}...</span>
+            </div>
+            <div class="hidden-lg hidden-md hidden-sm hidden-stb flight_name_noMobile pull-left">
+                <span class="block logo_name RobotoRegular ng-binding ng-scope" ng-if="!flt.im">{{ flightA.flight.name }}...</span>
+                <span class="block flt_number light_gray ng-binding ng-scope" ng-if="!flt.im">{{ flightA.flight.code }}</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 time_info time_info_space"> <span class="block timeCa RobotoRegular ng-binding">{{ flightA.departure_time }}</span>
+                <span class="block city_name hidden-xs visible-stb ng-binding">{{ flightA.flight_from }}</span>
+                <span class="block city_name hidden-lg hidden-md hidden-sm hidden-stb ng-binding">2h 00m</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 time_info"> <span class="block timeCa RobotoRegular ng-binding">{{ flightA.arrival_time }}</span>
+                <span class="block city_name hidden-xs visible-stb ng-binding">{{ flightA.flight_to }}</span>
+                <span class="block city_name hidden-lg hidden-md hidden-sm hidden-stb ng-binding">{{ flightA.stop }}</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs row time_info duratn"> <span class="block timeCa RobotoRegular ng-binding">2h 00m</span> <span class="block city_name ng-binding">{{ getStopage(flightA.stop) }}</span> </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right price_sectn make_relative">
+                <p class="price_info RobotoRegular"><span class="INR">Rs.</span> <span class="num ng-binding">{{ getPrice(flightA.price) }}</span></p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs pull-right round_dscnt hidden-stb">
+                <p class="clearfix"><a class="btn btn-md select_button pull-right hidden-xs btn-primary-red" data-ng-click="recheckFlights(flt)" href="#">Book</a></p>
+            </div>
+            <a href="#" class="pull-right next_icon hidden-lg hidden-md hidden-sm hidden-xs"><img src="v2/images/arrow_icon.png" alt="arrow-icon"></a>
+        </div>
+    </div>
+<div ng-show="!data.length">No data found for this filter range</div>

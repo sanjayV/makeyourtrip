@@ -1,0 +1,106 @@
+<div ng-controller="flightController">
+    <div class="hp-widget">
+        <div class="container">
+            <section class="hp-widget--left clearfix" id="js-hp-widgetSection">
+                <div class="hp-widget-top">
+                    <h1>Book <a href="//www.makemytrip.com/flights">Domestic</a> and <a href="//www.makemytrip.com/international-flights">International</a> flights</h1>
+                    <div id="js-switch__option" class="switch__option">
+                        <div class="switchBTN">
+                            <input id="switch__input_1" class="switchBTN__toogle" type="radio" name="widgetOption" value="true">
+                            <label for="switch__input_1" class="label_text flight-trip-type">one way</label>
+                        </div>
+                        <!-- <div class="switchBTN">
+                            <input id="switch__input_2" class="switchBTN__toogle" checked="checked" type="radio" name="widgetOption" value="false">
+                            <label for="switch__input_2" class="label_text">round trip</label>
+                        </div>
+                        <div class="switchBTN">
+                            <input id="switch__input_3" class="switchBTN__toogle" type="radio" name="widgetOption" value="MultiCity">
+                            <label for="switch__input_3" class="label_text">multicity</label>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="input__option inputTopRow clearfix">
+                    <div class="inputM inputHlp inputFilter visited">
+                        <input ng-click="showPassflag=false;showClassflag=false;" ng-model="fromLocation" list="fromLocation" class="input_fromto ui-autocomplete-input" tabindex="1" required="" type="text" id="hp-widget__sfrom" autocomplete="off">
+                        <datalist id="fromLocation" size="5">
+                            <option ng-repeat="city in cities" value="{{ city.iata }}"><small>{{ city.city }}, {{ city.country }}</small></option>
+                        </datalist>
+                        <span class="inputM__highlight"></span> <span class="inputM__bar input_fromto"></span>
+                        <label>From</label>
+                        <div hidden="" class="ch-error-widgit ch-clearfix" id="hp-widget__sFrom_invalid_error">
+                            <p class="o-i-error-icon"></p><span class="ch-flL"><span class="o-i-error-symbol"></span> </span><span class="ch-flL ch-error-innertxt">Enter a valid 'Departure City' or select from the list.</span></div>
+                    </div><span class="o-i-swap-button"></span>
+                    <div class="inputM inputHlp inputFilter visited">
+                        <input ng-click="showPassflag=false;showClassflag=false;" ng-model="toLocation" list="toLocation" class="input_fromto ui-autocomplete-input" tabindex="1" required="" type="text" id="hp-widget__sTo" autocomplete="off">
+                        <span class="inputM__highlight"></span> <span class="inputM__bar input_fromto"></span>
+                        <label>To</label>
+                        <datalist id="toLocation" size="5">
+                            <option ng-repeat="city in cities" value="{{ city.iata }}"><small>{{ city.city }}, {{ city.country }}</small></option>
+                        </datalist>
+                        <div hidden="" class="ch-error-widgit ch-clearfix" id="hp-widget__sTo_error">
+                            <p class="o-i-error-icon"></p><span class="ch-flL"><span class="o-i-error-symbol"></span> </span><span class="ch-flL ch-error-innertxt">The 'Departure City' and 'Destination City' cannot be same. Please re-type.</span></div>
+                        <div hidden="" class="ch-error-widgit ch-clearfix" id="hp-widget__sTo_invalid_error">
+                            <p class="o-i-error-icon"></p><span class="ch-flL"><span class="o-i-error-symbol"></span> </span><span class="ch-flL ch-error-innertxt">Enter a valid 'Destination City' or select from the list.</span></div>
+                    </div>
+                    <div class="inputM depart_input inputHlp inputDateFilter">
+                        <input style="width: 200px;" ng-click="showPassflag=false;showClassflag=false;" ng-model="departDate" tabindex="1" required="" type="date" id="hp-widget__depart" mt-id="departDate"> <span class="inputM__highlight"></span> <span class="inputM__bar"></span>
+                        <label>Depart</label>
+                    </div>
+                    <!-- <div class="inputM inputHlp disable inputDateFilter">
+                        <input tabindex="1" required="" ng-click="showPassflag=false;showClassflag=false;" type="text" id="hp-widget__return" mt-id="returnDate" readonly="readonly"> <span class="inputM__highlight"></span> <span class="inputM__bar"></span> <span class="inputM__closeIcon inputHlp__close o-i-cross" style="display:inline-block"></span>
+                        <label>Return</label>
+                        <div hidden="" class="ch-error-widgit ch-clearfix" id="hp-widget__sReturnDate_invalid_error">
+                            <p class="o-i-error-icon"></p><span class="ch-flL"><span class="o-i-error-symbol"></span> </span><span class="ch-flL ch-error-innertxt">Select a 'Return Date' or select ONE WAY journey type.</span></div>
+                    </div> -->
+                    <div class="inputM inputHlp inputFilter visited">
+                        <input ng-model="totalPassenger" tabindex="1" required="" ng-focus="showPassflag=true;showClassflag=false;" type="text" id="hp-widget__paxCounter" mt-id="PassCount" readonly="readonly"> <span class="inputM__highlight"></span> <span class="inputM__bar"></span>
+                        <label>Passengers</label>
+                        <div class="paxFilter" ng-show="showPassflag == true">
+                            <div class="clearfix">
+                                <div class="paxCounter">
+                                    <div class="paxCounter__title" id="js-paxCounter__title_0">
+                                        <p class="">ADULTS<span class="paxCounter__titleInst">(+12 yrs)</span></p>
+                                    </div>
+                                    <div class="paxCounter__counter">
+                                        <ul class="adult_counter" id="js-adult_counter">
+                                            <li ng-repeat="i in [1,2,3,4,5,6,7,8,9]" ng-click="setPassenger(i, 'ad')" ng-class="{ 'selected': selectedAd == i }">{{ i }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="paxCounter">
+                                    <div class="paxCounter__title" id="js-paxCounter__title_1">
+                                        <p class="">CHILDREN<span class="paxCounter__titleInst">2-12 yrs</span></p>
+                                    </div>
+                                    <div class="paxCounter__counter">
+                                        <ul class="child_counter" id="js-child_counter">
+                                            <li ng-repeat="i in [0,1,2,3,4,5,6]" ng-click="setPassenger(i, 'ch')" ng-class="{ 'selected': selectedCh == i }">{{ i }}</li>
+                                        </ul><span class="o-i-cross-dark removePaxCounter hidden"></span></div>
+                                </div>
+                                <p><a class="close_pax pull-right" ng-click="showPassflag=false">Done</a></p>
+                            </div>
+                        </div>
+                        <div hidden="" class="ch-error-widgit ch-clearfix" id="hp-widget__paxCounter_error">
+                            <p class="o-i-error-icon"></p><span class="ch-flL"><span class="o-i-error-symbol"></span> </span><span class="ch-flL ch-error-innertxt"></span></div>
+                    </div>
+                    <div class="hp-widget__advSearch" id="js-hp-widget__advSearch">
+                        <div class="inputM inputHlp inputFilter visited">
+                            <input ng-model="selectedClassName" ng-click="showPassflag=false; showClassflag=true;" tabindex="1" required="" type="text" id="hp-widget__class" mt-id="class" readonly="readonly">
+                            <label>Class</label>
+                            <div class="classFilters" id="js-classFilters" ng-show="showClassflag">
+                                <div class="classBTN">
+                                    <div class="classLabel" ng-class="{'checked': selectedClass == 1}" ng-click="setClass(1, 'Economy');showClassflag=false;">Economy</div>
+                                </div>
+                                <div class="classBTN">
+                                    <div class="classLabel" ng-class="{'checked': selectedClass == 2}" ng-click="setClass(2, 'Business');showClassflag=false;">Business</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button ng-click="getFlight();showPassflag=false;showClassflag=false;" tabindex="1" mt-event-id="submit" id="searchBtn" class="btn btn-primary btn_mainSearch">Search</button></div>
+            </section>
+        </div>
+    </div>
+    <!-- <div class="alert alert-danger" ng-class="{'alert-danger': !ctrl.github, 'alert-success': ctrl.github}">Is GitHub Up?
+        <yep-nope check="ctrl.github"></yep-nope>
+    </div> -->
+</div>

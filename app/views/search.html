@@ -1,0 +1,147 @@
+<div ng-controller="searchController" class="container" style="padding: 10px 0;">
+    <div class="append_bottom1">
+        <!-- modify search -->
+        <div class="mfs_rel_wrapper make_relative append_bottom16 clearfix">
+            <div class="modify_search noneAll" style="width: 100%; position: static; z-index: 501;">
+                <!-- top part -->
+                <!-- ngIf: deviceType != 'mobile' -->
+                <div class="modify_top col-md-12 col-sm-12 hidden-xs visible-stb ng-scope" style="border-radius: 3px;">
+                    <div class="row">
+                        <!-- city and country -->
+                        <a class="col-md-3 col-sm-3 col-xs-3 has_fade has_right_border" href="javascript:angular.noop();">
+                            <span class="rund_trip_txt modify_captions make_blockElm append_bottom8 ng-binding">ONE WAY</span>
+                            <p class="modify_city_name modify_txt ng-binding">{{ fromLocation.city }} to {{ toLocation.city }}</p>
+                        </a>
+                        <!-- /city and country -->
+                        <!-- check-in -->
+                        <a class="col-md-3 col-sm-2 col-xs-2 has_fade modify_search_dept" href="javascript:angular.noop();" ng-click="showModifySearch();" style="opacity: 1;">
+                            <p class="modify_captions">DEPARTURE</p>
+                            <p class="check-dates modify_txt">
+                                <span class="glyphicon glyphicon-calendar hidden-stb"></span>
+                                <span class="date ng-binding">{{ dDate | date : "dd" }}</span>
+                                <span class="month_day RobotLight ">
+									<span class="month_day ng-binding">{{ dDate | date : "MMMM yy" }}</span>
+                                <span class="month_day ng-binding">{{ dDate | date : "EEE" }}</span>
+                                </span>
+                                <span class="arrow_greater">&gt;</span>
+                            </p>
+                        </a>
+                        <div class="hidden-stb">
+                            <!-- nights -->
+                            <a class="col-md-2 col-sm-1 text-center has_fade" href="javascript:angular.noop();" ng-click="showModifySearch();" style="opacity: 1;">
+                                <p class="modify_captions">Adult</p>
+                                <p class="check-dates modify_txt">
+                                    <span class="date ng-binding">{{ adultP }}</span>
+                                </p>
+                            </a>
+                            <!-- /nights -->
+                            <!-- rooms -->
+                            <a class="col-md-2 col-sm-1 col-xs-2 text-center has_fade" href="javascript:angular.noop();" ng-click="showModifySearch();" style="opacity: 1;">
+                                <p class="modify_captions">Child</p>
+                                <p class="check-dates modify_txt">
+                                    <span class="date ng-binding">{{ childP }}</span>
+                                </p>
+                            </a>
+                            <!-- /rooms -->
+                            <!-- people -->
+                            <!-- <a class="col-md-1 col-sm-1 col-xs-2 text-center has_fade" href="javascript:angular.noop();" ng-click="showModifySearch();" style="opacity: 1;">
+                                <p class="modify_captions">Infant</p>
+                                <p class="check-dates">
+                                    <span class="date modify_txt ng-binding">--</span>
+                                </p>
+                            </a> -->
+                            <!-- /people -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div id="filters_panel" class="col-lg-3 col-md-3 col-xs-12 hidden-sm hidden-stb hidden-xs filter_popup_location" ng-class="{'hidden-sm hidden-stb hidden-xs':!filterTrigger, 'filter_popup_location':deviceType != 'mobile', 'filter_popup_location_mb':deviceType == 'mobile'}" data-ng-style="{display:block,left:left,top:top}">
+            <div class="rows">
+                <span ng-class="{'filter_tip':deviceType != 'mobile'}" class="filter_tip"></span>
+                <span class="hidden-xs hidden-md visible-stb hidden filter_tip" ng-class="{'filter_tip':deviceType != 'mobile'}"></span>
+                <div data-filters="" data-filter-data="filterData" data-filter-request="filterRequest" data-fare-reset-parent="fareReset" data-listing-type="oneway" data-request="request" class="ng-isolate-scope">
+
+                    <div class="filter_subdivisions filter_price farechange-dep">
+                        <p class="append_bottom10 clearfix">
+                            <strong class="filters_subhead pull-left">Price Range</strong>
+                            <a class="pull-right clear_btn ng-hide" href="javascript:angular.noop()" data-ng-show="filterRequest.dep.fareRange.max<filterData.dep.maxfare" ng-click="resetFilter('fareChange','dep');">Reset</a>
+                        </p>
+                        <div class="price_borderbox col-xs-12">
+                            <p class="clearfix append_bottom16">
+                                <span class="price_text pull-left">
+                <span class="INR">Rs.</span>
+                                <span id="min_price" class="ng-binding">1000</span>
+                                </span>
+                                <span class="price_text pull-right">
+                <span class="INR">Rs.</span>
+                                <span id="max_price" class="ng-binding">50000</span>
+                                </span>
+                            </p>
+                            <div id="price_slider" data-change="priceChange()">
+                                <input id="slider1" type="range" min="1000" max="50000" step="500" ng-model="priceRangeSlider" ng-mouseup="getRange()" />
+                                <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 100%;"></div>
+                                <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="filter_subdivisions aln-dep">
+                        <p class="append_bottom10 clearfix">
+                            <strong class="filters_subhead pull-left">Airlines</strong>
+                            <a class="pull-right clear_btn" href="javascript:angular.noop()" ng-click="resetFilter('aln','dep');">Reset</a>
+                        </p>
+
+                        <!-- ngRepeat: airline in getSortedAlns(filterData.dep.aln) -->
+                        <div ng-repeat="airline in flightData" class="checkbox append_bottom6 clearfix" id="aln_SG_dep">
+                            <span class="pull-left airline_image"><span class="logo L{{ airline.code }}_sm"></span></span> 
+                            <span class="pull-left airline_info"> 
+                                <span class="make_blockElm airline_name append_bottom4 ng-binding">{{ airline.name }}</span>
+                            </span> 
+                            <input type="checkbox" ng-checked="selection.indexOf(airline.name) > -1" ng-click="toggleSelection(airline.name)" style="display:block;position: absolute;right: 10px;" class="checkbox_state pull-right">
+                        </div>                        
+                    </div>
+                    <div class="dummy_gap_stickybar">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <!-- shorting -->
+            <div id="sortingRow" class="row append_bottom8 sorting_button_row">
+                <div class="col-lg-12 clearfix">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4 flight_informtn">
+                        <a href="javascript:angular.noop()" class="row segmented_btn first ng-isolate-scope" id="departure" data-raw-click="" data-key="departure" ng-click="orderByFn('flight.name')">Flight<span ng-show="shortedField == 'flight.name'" ng-class="{'up_arrow' : !shortFlag, 'down_arrow': shortFlag}"></span> </a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4 departure_informtn">
+                        <a href="javascript:angular.noop()" class="row segmented_btn first ng-isolate-scope" id="departure" data-raw-click="" data-key="departure" ng-click="orderByFn('departure_time')">DEPARTURE<span ng-show="shortedField == 'departure_time'" class="up_arrow"></span> </a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 arrival_informtn">
+                        <a href="javascript:angular.noop()" class="row segmented_btn ng-isolate-scope" id="arrival" data-raw-click="" data-key="arrival" ng-click="orderByFn('arrival_time')">ARRIVAL<span ng-show="shortedField == 'arrival_time'" class="up_arrow"></span> </a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 duration_informtn hidden-xs">
+                        <a href="javascript:angular.noop()" class="row segmented_btn ng-isolate-scope" id="duration" data-raw-click="" data-key="duration">DURATION<span></span> </a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 price_informtn">
+                        <a href="javascript:angular.noop()" class="row segmented_btn active ng-scope ng-isolate-scope" id="price" data-raw-click="" data-key="price" data-click-clbk="sortFltsEvent(ele)">PRICE </a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 pull-right hidden-stb hidden-xs">
+                        <a href="javascript:angular.noop()" class="row segmented_btn last">&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ngRepeat: flt in (filterdlist=(flights|masterfilter:journeyFilterRequest:filterData.dep))|orderBy:sortFn:order|limitTo:displayed -->
+            <div class="flightInfoDiv"></div>
+
+            <div grid-trip data="flightAvailable" filterd="filterd"></div>
+            <!-- end ngRepeat: flt in (filterdlist=(flights|masterfilter:journeyFilterRequest:filterData.dep))|orderBy:sortFn:order|limitTo:displayed -->
+
+            <div infinite-scroll="updateDisplayedResults();" infinite-scroll-distance="1"></div>
+        </div>
+    </div>
+</div>
