@@ -17,10 +17,12 @@ var flight = function() {
                 if (tempObj.length) {
                     useVar = angular.copy(tempObj);
                 }
+                console.log(priceRange)
 
                 tempObj = [];
                 angular.forEach(useVar, function(v, k) {
-                    if (v.price.adult[priceRange.classType] >= priceRange.min && v.price.adult[priceRange.classType] <= priceRange.max) {
+                    if (v.price.adult[priceRange.classType] * priceRange.adultP + v.price.adult[priceRange.classType] * priceRange.childP >= priceRange.min 
+                        && v.price.adult[priceRange.classType] * priceRange.adultP + v.price.adult[priceRange.classType] * priceRange.childP <= priceRange.max) {
                         tempObj.unshift(v);
                     }
                 });

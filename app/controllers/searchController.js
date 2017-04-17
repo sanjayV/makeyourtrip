@@ -4,7 +4,7 @@ searchController.$inject = ['$scope', 'flightService', 'appConstant', '$state', 
 
 function searchController($scope, flightService, appConstant, $state, $filter, $compile, flightFilter, orderBy) {
     var _this = this;
-    $scope.priceRange = { 'min': 1000, 'max': $scope.priceRange, 'classType': 50000 };
+    $scope.priceRange = { 'min': 1000, 'max': $scope.priceRange, 'classType': 100000 };
     $scope.priceRangeSlider = 50000;
     if (flightService.cities && flightService.cities.length) {
         $scope.cities = angular.copy(flightService.cities);
@@ -36,6 +36,9 @@ function searchController($scope, flightService, appConstant, $state, $filter, $
             'adultP': angular.copy($scope.adultP),
             'childP': angular.copy($scope.childP),
         }
+
+        $scope.priceRange.adultP = angular.copy($scope.adultP);
+        $scope.priceRange.childP = angular.copy($scope.childP);
 
         getFlight();
         getAvailableFlight();
@@ -81,6 +84,8 @@ function searchController($scope, flightService, appConstant, $state, $filter, $
 
     $scope.getRange = function() {
         $scope.priceRange = { 'min': 1000, 'max': $scope.priceRangeSlider, 'classType': $scope.pClass };
+        $scope.priceRange.adultP = angular.copy($scope.adultP);
+        $scope.priceRange.childP = angular.copy($scope.childP);
         $scope.filterData();
     };
 
